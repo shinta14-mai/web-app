@@ -1,6 +1,5 @@
 <template>
 <Layout>
-    <Head title="User-Details" />
     <div>
     <h1>{{ title }}</h1>
     <ul>
@@ -8,6 +7,8 @@
             <h3>{{ user.name }}</h3>
             <p>Email: <strong> {{ user.email }} </strong></p>
             <Link href="/users">Back</Link>
+            <a href="" @click.prevent="deleteAdmin">Delete</a>
+            <Link :href="`/users/${user.id}/edit`">Edit</Link>
         </li>
     </ul>
 </div>
@@ -25,6 +26,11 @@ export default {
     components: {
         Link,
         Layout,
+    },
+    methods: {
+        deleteAdmin(){
+            this.$inertia.delete('/users/' + this.user.id)
+        }
     }
 }
 </script>

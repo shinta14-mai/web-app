@@ -1,28 +1,21 @@
 <template>
     <Layout>
-        <Head title="Register" />
     <div>
-        <h1>Register</h1>
-        <form @submit.prevent="register">
+        <h1>Edit Profile</h1>
+        <form @submit.prevent="update">
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" v-model="user.name">
+                <input type="text" v-model="form.name">
                 <p v-if="errors.name" class="errors">{{ errors.name }}</p>
             </div>
 
             <div class="form-group">
                 <label>Email</label>
-                <input type="text" v-model="user.email">
+                <input type="text" v-model="form.email">
                 <p v-if="errors.email" class="errors">{{ errors.email }}</p>
             </div>
 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" v-model="user.password">
-                <p v-if="errors.password" class="errors">{{ errors.password }}</p>
-            </div>
-
-            <button type="submit">Register</button>
+            <button type="submit">Update</button>
         </form>
     </div>
     </Layout>
@@ -45,21 +38,21 @@ export default {
     },
     props: {
         title: String,
-        errors: Object
+        errors: Object,
+        user: Object
     },
     data(){
         return{
-            user: {
-                name: '',
-                email: '',
-                password: '',
+            form: {
+                name: this.user.name,
+                email: this.user.email,
             }
         }
     },
     methods: {
-        register(){
-            this.$inertia.post('/users', this.user)
-        }
+        update(){
+            this.$inertia.put('/users/' + this.user.id, this.form)
+        },
     }
 }
 </script>

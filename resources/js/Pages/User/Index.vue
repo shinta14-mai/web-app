@@ -1,13 +1,15 @@
 <template>
 <Layout>
-    <Head title="User-List" />
     <div>
     <h1> {{ title }} List</h1>
     <Link href="/users/create">Register</Link>
+    <div v-if="$page.props.flash.message" class="alert">
+        {{ $page.props.flash.message }}
+    </div>
     <ul>
-        <li v-for="user in users">
-            <p>{{ user.name }}</p>
-            <Link :href="`/users/${user.id}`">Details</Link>
+        <li v-for="users in users">
+            <p>{{ users.name }}</p>
+            <Link :href="`/users/${users.id}`">Details</Link>
         </li>
     </ul>
 </div>
